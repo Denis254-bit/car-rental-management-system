@@ -1,0 +1,6 @@
+{
+  "name": "Car Rental System",
+  "description": "An elegant car rental and fleet management app featuring real-time availability tracking, dynamic rent calculation, and comprehensive reservation management based on the classic CLI implementation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
