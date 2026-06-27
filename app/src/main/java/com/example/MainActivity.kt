@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.firestore.FirebaseFirestore
 import com.example.data.AppDatabase
 import com.example.data.CarRepository
 import com.example.ui.CarDashboardScreen
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         // Core data structures
         val database = AppDatabase.getInstance(applicationContext, lifecycleScope)
-        val repository = CarRepository(database.carDao)
+        val repository = CarRepository(database.carDao, FirebaseFirestore.getInstance())
         
         // Instant factory construct
         val viewModel: CarViewModel by viewModels {
