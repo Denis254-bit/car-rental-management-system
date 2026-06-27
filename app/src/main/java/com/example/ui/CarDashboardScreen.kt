@@ -51,6 +51,7 @@ fun CarDashboardScreen(
 ) {
     val cars by viewModel.cars.collectAsStateWithLifecycle()
     val reservations by viewModel.reservations.collectAsStateWithLifecycle()
+    val isSignedIn by viewModel.isSignedIn.collectAsStateWithLifecycle()
 
     var activeTab by remember { mutableStateOf(0) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -118,12 +119,12 @@ fun CarDashboardScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            // Quick refresh indicator
+                            if (isSignedIn) viewModel.signOut() else viewModel.signIn()
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Refresh,
-                            contentDescription = "Refresh Data",
+                            imageVector = if (isSignedIn) Icons.Default.ExitToApp else Icons.Default.AccountCircle,
+                            contentDescription = if (isSignedIn) "Sign Out" else "Sign In",
                             tint = CyberCyan
                         )
                     }

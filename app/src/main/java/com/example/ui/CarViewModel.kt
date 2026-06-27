@@ -9,10 +9,10 @@ import com.example.data.ReservationEntity
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -22,6 +22,18 @@ sealed interface UiMessage {
 }
 
 class CarViewModel(private val repository: CarRepository) : ViewModel() {
+
+    private val _isSignedIn = MutableStateFlow(false)
+    val isSignedIn: StateFlow<Boolean> = _isSignedIn.asStateFlow()
+
+    fun signIn() {
+        _isSignedIn.value = true
+        // In a real app, this would trigger the Google Sign-In intent
+    }
+
+    fun signOut() {
+        _isSignedIn.value = false
+    }
 
     val cars: StateFlow<List<CarEntity>> = repository.allCars
         .stateIn(
